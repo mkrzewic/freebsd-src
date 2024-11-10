@@ -2309,7 +2309,7 @@ pf_src_tree_remove_state(struct pf_kstate *s)
 	if (s->src_node != NULL) {
 		sn = s->src_node;
 		PF_SRC_NODE_LOCK(sn);
-		if (s->src.tcp_est)
+		if (s->src.tcp_est && (sn->conn)!=0)
 			--sn->conn;
 		if (--sn->states == 0)
 			sn->expire = time_uptime + timeout;
